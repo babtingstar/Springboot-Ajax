@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>유저 상세 조회</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+<h1>사용자 정보</h1>
+<div id="userDetail">
+    <p>데이터를 불러오는 중</p>
+    <script>
+        $.ajax({
+            url: `/api/user/${id}`,
+            method: 'get',
+            //dataType : '',
+            success: function (data) {
+                if (data.length > 0) {
+                    $('userDetail').html(`<p>아이디 : ${data.id}</p>`)
+                }
+            },
+            error: function () {
+                $('userDetail').html(`<p>일치하는 회원을 조회할 수 없습니다.</p>`)
+            }
+        })
+    </script>
+</div>
+</body>
+</html>

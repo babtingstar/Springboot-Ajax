@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>main page</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+<h1>안녕하세요. 홈페이지 입니다.</h1>
+<div class="main-container" id="mainContainer">
+    <p>데이터를 불러오는 중...</p>
+</div>
+<script>
+    /*
+    * 200 204
+    * HTTP 200 OK
+    *   -> 요청 성공, 데이터를 본문에 보여줌 반환
+    *   -> HTML JSON 등
+    *   -> 요청한 크기 만큼 유동적으로 늘어남
+    *   -> GET POST PUT 결과를 반환
+    *
+    * HTTP 204 No content
+    *   -> 요청 성공, 반환할 본문 없음
+    *   -> DELETE, PUT 결과 반환할 필요 없을 때
+    *   -> 크기 0
+    *
+    *
+    * 400 (Bad Request) = 잘못된 요청
+    * 클라이언트가 잘못된 데이터를 백엔드에게 보내거나
+    * 요청이 서버의 요구 사항을 충족하지 못하기 때문에 원하는 데이터를 줄 수 없는 상태
+    *
+    * 404 500 504 에러
+     */
+    const queryParams = new URLSearchParams(window.location.search);
+    console.log(window.location.search);
+    const userId = queryParams.get('id');
+    console.log("userId : " + userId);
+    const examId = 1;
+
+    $.ajax({
+        url: '/api/users',
+        method: 'get',
+        success: function (data) { // DB 에서 컨트롤러가 전달받은 데이터가 1개 이상이라면
+            if (data.length > 0) {
+                let html;
+                $.each(data,
+                    function (index, user) {
+                        const userInfo = `<p><strong>ID : </strong>${user.id}</p>
+                                      <p><strong>Nickname : </strong>${user.nickname}</p>
+                                      <p><strong>Name : </strong>${user.name}</p>
+                                      <p><strong>Email : </strong>${user.email}</p>
+                                      `
+                        $('#mainContainer').append(userInfo);
+                    }
+                )
+            } else { // 컨트롤러가 전달받은 데이터가 없다면
+                $('#mainContainer').html("<p>정보가 조회되지 않습니다.</p>")
+            }
+        },
+        error: function () {
+            alert("컨트롤러에 문제가 생겨서 데이터를 가져오지 못합니다.");
+        }
+    })
+
+    $.ajax({
+        url: 'api/data',
+        method: 'get',
+        success: function (data) {
+            $('#mainContainer').html("<p>" + data.msg + "</p>")
+            $('#mainContainer').html("<p>" + data.status + "</p>")
+        },
+        error: function () {
+            $('#mainContainer').html("<p>'Controller 에서 데이터를 가져오지 못했습니다.</p>")
+        }
+    })
+    $.ajax({
+        url: 'api/hello',
+        method: 'GET',
+        success: function (data) {
+            $('#mainContainer').html("<p>" + data + "</p>");
+        },
+        error: function () {
+            $('#mainContainer').html("<p>'Controller 에서 데이터를 가져오지 못했습니다.</p>")
+        }
+    })
+</script>
+</body>
+</html>
