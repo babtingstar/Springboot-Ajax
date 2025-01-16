@@ -1,6 +1,6 @@
 package com.kh.AjaxSpringProject.service;
 
-import com.kh.AjaxSpringProject.DTO.User;
+import com.kh.AjaxSpringProject.dto.User;
 import com.kh.AjaxSpringProject.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

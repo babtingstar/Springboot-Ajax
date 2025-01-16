@@ -1,6 +1,6 @@
 package com.kh.AjaxSpringProject.controller;
 
-import com.kh.AjaxSpringProject.DTO.User;
+
 import com.kh.AjaxSpringProject.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class IndexController {
-
     @Autowired
     private UserService userService;
 
@@ -19,11 +18,31 @@ public class IndexController {
         return "index";
     }
 
-    // Ajax 와 별개로 /detail/원하는회원정보번호 를 통해서
-    // detail.html 을 보여줄 수 있도록 설정하는 controller
+    // Ajax 와 별개로 /detail/원하는회원정보번호를 통해서
+    // userInfo.html을 보여줄 수 있도록 설정하는 controller
     @GetMapping("/detail/{id}")
     public String detail(@PathVariable int id, Model model) {
         model.addAttribute("user", userService.getUserId(id));
         return "userInfo";
+    }
+
+    @GetMapping("/get/avatar")
+    public String getAvatar() {
+        return "avatar";
+    }
+
+    @GetMapping("/get/randomLogo")
+    public String getRandomLogo() {
+        return "randomLogo";
+    }
+
+    @GetMapping("/get/product")
+    public String getProduct() {
+        return "product";
+    }
+
+    @GetMapping("/get/kakaoLogin")
+    public String getKakaoLogin() {
+        return "kakaoLogin";
     }
 }

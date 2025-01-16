@@ -6,12 +6,10 @@
     <select id="getAllUsers">
         SELECT * FROM members
     </select>
-
-    <!-- mybatis config 설정으로 parameterType resultType 작성할 이유 X-->
-
-    <select id="getUserid">
-        SELECT *
-        FROM members
-        WHERE id=#{id}
+    <!-- mybatis config 설정으로 parameterType resultType 작성할 이유  XXX -->
+    <select id="getUserId">
+        SELECT  *
+        FROM    members
+        WHERE   id=#{id}
     </select>
 </mapper>
