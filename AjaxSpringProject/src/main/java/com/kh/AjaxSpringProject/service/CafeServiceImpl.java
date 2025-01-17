@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class CafeServiceImpl implements CafeService{
+public class CafeServiceImpl  implements CafeService {
 
     @Autowired
     private CafeMapper cafeMapper;

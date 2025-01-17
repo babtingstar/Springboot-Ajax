@@ -36,7 +36,7 @@ public class AjaxController {
     @GetMapping("/api/users")
     public List<User> getAllUSers(){
         List<User> users = userService.getAllUsers();
-//        log.info(users.toString());// 데이터의 정보가 어떻게 나오는지 확인하는 info
+        log.info(users.toString());// 데이터의 정보가 어떻게 나오는지 확인하는 info
         return users;
     }
     // id = 유동적으로 사용자가 선택하는 id값으로 변경
@@ -49,13 +49,10 @@ public class AjaxController {
     }
 
 
-
-
     @GetMapping("/api/hello")
     public String hello() {
         return "hello";
     }
-
 
     @GetMapping("/api/data")
     public Map<String,String> data() {
